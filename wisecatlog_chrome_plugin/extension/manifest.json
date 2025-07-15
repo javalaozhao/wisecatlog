@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "WiseCatLog - 智能文章目录",
+  "version": "1.0.0",
+  "description": "智能分析网页内容，自动生成交互式目录，提升长文阅读体验。",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "css": ["styles/toc.css"]
+    }
+  ]
+}

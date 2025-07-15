@@ -1,0 +1,265 @@
+:root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+    
+    --light-bg: #f8f9fa;
+    --light-text: #212529;
+    --light-border: #e9ecef;
+    --light-accent: #845ef7;
+    --light-accent-hover: #7048e8;
+    --light-code-bg: #ffffff;
+    --light-card-bg: #ffffff;
+    --light-shadow: rgba(0, 0, 0, 0.05);
+
+    --dark-bg: #121212;
+    --dark-text: #e0e0e0;
+    --dark-border: #333333;
+    --dark-accent: #9775fa;
+    --dark-accent-hover: #a585fc;
+    --dark-code-bg: #1e1e1e;
+    --dark-card-bg: #1e1e1e;
+    --dark-shadow: rgba(255, 255, 255, 0.1);
+
+    --bg-color: var(--light-bg);
+    --text-color: var(--light-text);
+    --border-color: var(--light-border);
+    --accent-color: var(--light-accent);
+    --accent-color-hover: var(--light-accent-hover);
+    --code-bg-color: var(--light-code-bg);
+    --card-bg-color: var(--light-card-bg);
+    --shadow-color: var(--light-shadow);
+
+    --transition-speed: 0.3s;
+}
+
+@keyframes background-pan {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+    animation: background-pan 30s linear infinite;
+}
+
+body.dark-theme {
+    --bg-color: var(--dark-bg);
+    --text-color: var(--dark-text);
+    --border-color: var(--dark-border);
+    --accent-color: var(--dark-accent);
+    --accent-color-hover: var(--dark-accent-hover);
+    --code-bg-color: var(--dark-code-bg);
+    --card-bg-color: var(--dark-card-bg);
+    --shadow-color: var(--dark-shadow);
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    padding-right: 340px; /* 为悬浮目录留出空间 */
+}
+
+.toc-container {
+    position: fixed;
+    top: 4rem;
+    right: 4rem;
+    width: 280px;
+    max-height: calc(100vh - 8rem);
+    background-color: rgba(var(--card-bg-color), 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-speed) ease;
+}
+
+.toc-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+#theme-toggle {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+#toc-nav {
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+#toc-nav ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    position: relative;
+}
+
+#toc-nav li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 6px;
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    z-index: 1;
+    font-size: 0.9rem;
+}
+
+#toc-nav li a:hover {
+    background-color: rgba(var(--accent-color), 0.1);
+    color: var(--accent-color);
+}
+
+#toc-nav li a.active {
+    color: var(--accent-color-hover);
+    font-weight: 700;
+}
+
+#toc-nav .toc-h1 { font-size: 0.95rem; font-weight: 700; }
+#toc-nav .toc-h2 { font-size: 0.9rem; padding-left: 1.5rem; }
+#toc-nav .toc-h3 { font-size: 0.85rem; padding-left: 2.5rem; opacity: 0.8; }
+
+/* 文章内容样式 */
+.animated-element {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animated-element.is-visible {
+    opacity: 1;
+    transform: none;
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+#article-content h1, #article-content h2, #article-content h3 {
+    scroll-margin-top: 4rem;
+    font-weight: 700;
+}
+
+#article-content a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color var(--transition-speed) ease;
+}
+
+#article-content a:hover {
+    color: var(--accent-color-hover);
+    text-decoration: underline;
+}
+
+/* 通用卡片样式 */
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 2.5rem 0;
+    box-shadow: 0 4px 16px var(--shadow-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px var(--shadow-color);
+}
+
+/* 代码块 */
+.code-block {
+    padding: 1.5rem;
+    overflow-x: auto;
+    font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+    font-size: 0.9rem;
+}
+
+/* 视频卡片 */
+.video-card {
+    overflow: hidden;
+}
+.video-card img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--border-color);
+}
+.video-card-title {
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+}
+
+/* 引用卡片 */
+.quote-card {
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem 2rem;
+    border-radius: 0 12px 12px 0;
+}
+.quote-card-title {
+    font-weight: bold;
+}
+.quote-card-excerpt {
+    font-style: italic;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+/* 社交媒体卡片 */
+.social-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+.social-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+.social-content .social-user {
+    font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+    .content-container {
+        padding: 2rem;
+        margin: 2rem auto;
+    }
+    .toc-container {
+        display: none;
+    }
+}

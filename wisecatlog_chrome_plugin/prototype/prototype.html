@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型 - 智能文章目录生成器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="toc-container">
+        <div class="toc-header">
+            <h3>文章目录</h3>
+            <button id="theme-toggle">切换主题</button>
+        </div>
+        <nav id="toc-nav">
+            <!-- 目录将由JS动态生成 -->
+        </nav>
+    </aside>
+
+    <main class="content-container">
+        <article id="article-content">
+            <!-- 文章内容将由JS动态加载 -->
+            <div class="loading-placeholder">正在加载文章内容...</div>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
